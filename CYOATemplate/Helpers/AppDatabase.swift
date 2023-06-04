@@ -26,9 +26,11 @@ struct AppDatabase {
             print(dbPath)
             
             // DEBUG: Ensure that database is copied again from app bundle
+            
 //            print("Removing existing database... ", terminator: "")
 //            try fileManager.removeItem(atPath: dbPath)
 //            // Remove temporary files too
+//
 //            try fileManager.removeItem(atPath: dbPath + "-shm")
 //            try fileManager.removeItem(atPath: dbPath + "-wal")
 //            print("removed.")

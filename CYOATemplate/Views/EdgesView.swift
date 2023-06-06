@@ -45,7 +45,9 @@ struct EdgesView: View {
                         Text(try! AttributedString(markdown: currentEdge.prompt))
                             .multilineTextAlignment(.trailing)
                             .onTapGesture {
+                                nodeHistories.append(currentEdge.to_node_id)
                                 currentNodeId = currentEdge.to_node_id
+                                
                             }
 
                     }
@@ -58,7 +60,10 @@ struct EdgesView: View {
 
                     Text("No edges found for node with \(currentNodeId).")
                         .onTapGesture {
+                            nodeHistories.removeAll()
+                            nodeHistories.append(1)
                             currentNodeId = 1
+                            
                         }
                 }
             }
@@ -86,7 +91,7 @@ struct EdgesView: View {
 struct EdgesView_Previews: PreviewProvider {
     static var previews: some View {
 
-        EdgesView(currentNodeId: .constant(3))
+        EdgesView(currentNodeId: .constant(3), nodeHistories: .constant([3]))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
 

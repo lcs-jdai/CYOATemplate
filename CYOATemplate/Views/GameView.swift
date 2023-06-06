@@ -12,6 +12,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
+    @State var nodeHistory: [Int]  = [1] // may be changed into a deque later on
     
     // MARK: Computed properties
     var body: some View {

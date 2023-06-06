@@ -24,6 +24,7 @@ struct EdgesView: View {
     // truth for the current node on GameView. This allows the current
     // node to be changed from this view.
     @Binding var currentNodeId: Int
+    @Binding var nodeHistories: [Int]
     
     // MARK: Computed properties
     
@@ -67,7 +68,7 @@ struct EdgesView: View {
     }
     
     // MARK: Initializer
-    init(currentNodeId: Binding<Int>) {
+    init(currentNodeId: Binding<Int>, nodeHistories: Binding<[Int]>) {
         
         // Retrieve edges for the current node in the graph
         _edges = BlackbirdLiveModels({ db in
@@ -77,6 +78,7 @@ struct EdgesView: View {
         
         // Set the current node
         _currentNodeId = currentNodeId
+        _nodeHistories = nodeHistories
         
     }
 }
@@ -87,6 +89,6 @@ struct EdgesView_Previews: PreviewProvider {
         EdgesView(currentNodeId: .constant(3))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
-        
+
     }
 }

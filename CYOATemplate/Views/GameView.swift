@@ -28,7 +28,7 @@ struct GameView: View {
             
             Divider()
             
-            EdgesView(currentNodeId: $currentNodeId)
+            EdgesView(currentNodeId: $currentNodeId, nodeHistories: $nodeHistory)
                         
             Spacer()
             

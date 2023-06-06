@@ -7,6 +7,9 @@
 
 import Blackbird
 import SwiftUI
+import AVFoundation
+
+var player:AVAudioPlayer!
 
 struct GameView: View {
     
@@ -32,8 +35,28 @@ struct GameView: View {
                         
             Spacer()
             
+            // play background music in swift
+            Button(action: {playSound()}, label: {Text("Play Background Music")})
+            
         }
         .padding()
+    }
+    
+    func playSound(){
+        
+        let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")
+        
+        guard let url = url else {
+            print("Cannot find file background music!")
+            return
+        }
+        do{
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        }catch{
+            
+        }
+        
     }
 }
 

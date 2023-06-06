@@ -9,8 +9,6 @@ import Blackbird
 import SwiftUI
 import AVFoundation
 
-var player:AVAudioPlayer!
-
 struct GameView: View {
     
     // MARK: Stored properties
@@ -52,6 +50,7 @@ struct GameView: View {
         }
         do{
             player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = -1
             player?.play()
         }catch{
             

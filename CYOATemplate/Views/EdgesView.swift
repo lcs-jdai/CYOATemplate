@@ -32,7 +32,21 @@ struct EdgesView: View {
     var body: some View {
         
         VStack(spacing: 20) {
-
+            // Display the previous page based on the node history
+            if nodeHistories.count > 1{
+                // displaying the button
+                HStack{
+                    Spacer()
+                    
+                    Text(try! AttributedString(markdown: "Back"))
+                        .multilineTextAlignment(.trailing)
+                        .onTapGesture {
+                            currentNodeId = nodeHistories[nodeHistories.count - 2]
+                            nodeHistories.removeLast()
+                        }
+                }
+            }
+            
             if edges.results.count > 0 {
 
                 ForEach(edges.results) { currentEdge in

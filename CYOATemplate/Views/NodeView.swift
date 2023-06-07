@@ -20,13 +20,15 @@ struct NodeView: View {
     
     // The list of nodes retrieved
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
+    @BlackbirdLiveQuery(tableName: "Node", { try await $0.query("SELECT * FROM Node") })  var databaseNodes
+    
     
     // MARK: Computed properties
     
     // The user interface
     var body: some View {
         if let node = nodes.results.first {
-
+            Spacer()
             // Show a Text view, but render Markdown syntax, preserving newline characters
             Text(try! AttributedString(markdown: node.narrative,
                                        options: AttributedString.MarkdownParsingOptions(interpretedSyntax:

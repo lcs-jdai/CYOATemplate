@@ -13,7 +13,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
-    @State var textSize: Int = 20
+    @State var textSize:Int = 20
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
@@ -56,14 +56,6 @@ struct GameView: View {
                                 buttonSwitch2.toggle()
                             }
                         }
-                    //                Button(action: {}, label: {
-                    //                    Image(systemName: "textformat")
-                    //                        .resizable()
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(width: 30,height: 20)
-                    //                        .foregroundColor(.black)
-                    //                })
-                    
                     
                     Spacer()
                     tabMenuIcon(showMenu: $showMenu, buttonSwitch2: $buttonSwitch2)
@@ -74,13 +66,7 @@ struct GameView: View {
 
                             }
                         }
-                    //                Button(action: {}, label: {
-                    //                    Image(systemName: "light.max")
-                    //                        .resizable()
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(width: 30,height: 20)
-                    //                        .foregroundColor(.black)
-                    //                })
+                 
                     Spacer()
                     tabIcon2(buttonSwitch2: $buttonSwitch2)
                         .onTapGesture {
@@ -91,15 +77,7 @@ struct GameView: View {
                             }
                         }
                     Spacer()
-                    //                Button(action: {
-                    //                    isDarkMode.toggle()
-                    //                }, label: {
-                    //                    Image(systemName: "moon.zzz")
-                    //                        .resizable()
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(width: 30,height: 20)
-                    //                        .foregroundColor(.black)
-                    //                })
+                  
                 }
                 .frame(height: UIScreen.main.bounds.height / 10)
                 .frame(width: UIScreen.main.bounds.width / 1)
@@ -110,7 +88,7 @@ struct GameView: View {
                 .padding(.bottom, 120)
             }
             if showTextMenu{
-                textMenu(textSize: 20)
+                textMenu(textSize:20)
                     .padding(.bottom, 120)
             }
         }
@@ -138,7 +116,7 @@ struct tabMenuIcon:View{
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
-            .foregroundColor(buttonSwitch2 ? .black : .white)
+            .foregroundColor(buttonSwitch2 ? .white : .black)
 
     }
 }
@@ -151,7 +129,7 @@ struct tabIcon1:View{
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
-            .foregroundColor(buttonSwitch2 ? .black : .white)
+            .foregroundColor(buttonSwitch2 ? .white : .black)
 
 
 
@@ -167,7 +145,7 @@ struct tabIcon2:View{
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
-            .foregroundColor(buttonSwitch2 ? .black : .white)
+            .foregroundColor(buttonSwitch2 ? .white : .black)
 
     }
 }
@@ -179,6 +157,10 @@ struct PopUpMenu: View{
             Text("Brightness:")
             Slider(value: $brightness, in: 0.0...1.0){
 //                UIScreen.main.brightness = CGFloat(brightness)
+            }
+            .onChange(of: brightness){ _ in
+                UIScreen.main.brightness = CGFloat(brightness)
+                
             }
         }
         .transition(.scale)

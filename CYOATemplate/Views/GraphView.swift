@@ -43,6 +43,7 @@ let screenHeight = screenSize.height - 40
 struct GraphView: View {
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
+        
     private var graph : [[Int]]{
         return make_graph(node_count: nodes.results.count, nodes: nodes, edges:edges)
     }
@@ -51,6 +52,7 @@ struct GraphView: View {
         VStack{
             Text("\(edges.results.count)")
             Text("\(nodes.results.count)")
+            Text("\(graph.count)")
             ZStack(alignment: .topLeading) {
                 
                 Rectangle()
@@ -76,13 +78,19 @@ struct GraphView: View {
     
     func make_graph(node_count: Int, nodes: Blackbird.LiveResults<Node>, edges: Blackbird.LiveResults<Edge>) -> [[Int]]{
         var graph: [[Int]] = []
-        for i in 0..<node_count{
+        for i in 0...node_count{
             graph.append([])
-            for _ in 0..<node_count{
+            for _ in 0...node_count{
                 graph[i].append(0)
             }
         }
         
+        for edge in edges.results{
+            let from_node = edge.from_node_id
+            let to_node = edge.to_node_id
+            graph[from_node][to_node] = 1
+            graph[to_node][from_node] = 1
+        }
         
         return graph
     }

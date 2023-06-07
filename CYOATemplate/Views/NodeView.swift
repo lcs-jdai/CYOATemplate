@@ -14,7 +14,7 @@ struct NodeView: View {
     
     // The id of the node we are trying to view
     var currentNodeId: Int
-
+    
     // Needed to query database
     @Environment(\.blackbirdDatabase) var db: Blackbird.Database?
     
@@ -32,7 +32,7 @@ struct NodeView: View {
                 // Show a Text view, but render Markdown syntax, preserving newline characters
                 Text(try! AttributedString(markdown: node.narrative,
                                            options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
-                                                                                                  .inlineOnlyPreservingWhitespace)))
+                                                .inlineOnlyPreservingWhitespace)))
             }
             .onAppear{
                 updateVisitCount(forNodeWithId: currentNodeId)
@@ -47,14 +47,14 @@ struct NodeView: View {
     
     
     func updateVisitCount(forNodeWithId id: Int) {
-            // Update visits count for this node
-            Task {
-                try await db!.transaction { core in
-                    try core.query("UPDATE Node SET visit_count = Node.visit_count + 1 WHERE node_id = ?", id)
-                }
+        // Update visits count for this node
+        Task {
+            try await db!.transaction { core in
+                try core.query("UPDATE Node SET visit_count = Node.visit_count + 1 WHERE node_id = ?", id)
             }
         }
-
+    }
+    
     
     // MARK: Initializer
     init(currentNodeId: Int) {
@@ -65,24 +65,24 @@ struct NodeView: View {
         //       in the Node table
         _nodes = BlackbirdLiveModels({ db in
             try await Node.read(from: db,
-                                    sqlWhere: "node_id = ?", "\(currentNodeId)")
+                                sqlWhere: "node_id = ?", "\(currentNodeId)")
         })
         
         // Set the node we are trying to view
         self.currentNodeId = currentNodeId
         
     }
-
+    
     
 }
 
 struct NodeView_Previews: PreviewProvider {
     
     static var previews: some View {
-
+        
         NodeView(currentNodeId: 1)
         // Make the database available to all other view through the environment
-        .environment(\.blackbirdDatabase, AppDatabase.instance)
-
+            .environment(\.blackbirdDatabase, AppDatabase.instance)
+        
     }
 }

@@ -40,9 +40,11 @@ let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width - 40
 let screenHeight = screenSize.height - 40
 
+
 struct GraphView: View {
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
+    let startNode: Int
     
     private var graph : [[Int]]{
         return make_graph(node_count: nodes.results.count, nodes: nodes, edges:edges)
@@ -129,6 +131,7 @@ struct GraphView: View {
                                 sqlWhere: "id > 0")
         })
         
+        startNode = start_node
     }
     
 }

@@ -36,8 +36,17 @@ struct VertexView: View {
     }
 }
 
+let screenSize: CGRect = UIScreen.main.bounds
+let screenWidth = screenSize.width - 40
+let screenHeight = screenSize.height - 40
+
 struct GraphView: View {
     @Environment(\.blackbirdDatabase) var db: Blackbird.Database?
+    
+    // storing all of the edges
+    @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
+    @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
+    
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -47,22 +56,30 @@ struct GraphView: View {
             VertexView(
                 radius: 16,
                 color: .black,
-                coordinate: CGPoint(x: 50, y: 50))
+                coordinate: CGPoint(x: screenWidth, y: screenHeight))
 
             EdgeShape(
-                start: CGPoint(x: 50, y: 50),
-                end: CGPoint(x: 320, y: 50))
+                start: CGPoint(x: screenWidth, y: screenHeight),
+                end: CGPoint(x: 0, y: 0))
             .stroke()
             
             VertexView(
                 radius: 16,
                 color: .red,
-                coordinate: CGPoint(x: 320, y: 50))
+                coordinate: CGPoint(x: 0, y: 0))
         }
     }
     
     init(){
+        _nodes = BlackbirdLiveModels({ db in
+            try await Node.read(from: db)
+        })
         
+        _edges = BlackbirdLiveModels({ db in
+            try await Edge.read(from: db)
+        })
+        
+        print("screen width: \(screenWidth) screen height: \(screenHeight)")
     }
     
 }

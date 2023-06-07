@@ -70,6 +70,18 @@ struct GraphView: View {
         }
     }
     
+    func make_graph(node_count: Int) -> [[Int]]{
+        var graph: [[Int]] = []
+        for i in 0..<node_count{
+            graph.append([])
+            for _ in 0..<node_count{
+                graph[i].append(0)
+            }
+        }
+        
+        return graph
+    }
+    
     init(){
         _nodes = BlackbirdLiveModels({ db in
             try await Node.read(from: db)
@@ -78,6 +90,10 @@ struct GraphView: View {
         _edges = BlackbirdLiveModels({ db in
             try await Edge.read(from: db)
         })
+        // creating the graph datastructure
+        let node_count = _nodes.wrappedValue.results.count
+        let graph = make_graph(node_count: node_count)
+        
         
         print("screen width: \(screenWidth) screen height: \(screenHeight)")
     }

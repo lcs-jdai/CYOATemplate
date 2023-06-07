@@ -77,40 +77,13 @@ struct GraphView: View {
     }
     
     
-    private var graphViewRepresentation: [[GraphViewRepresentationNode]]{
-        // [layers][nodes]
-        var graphViewRepresentation: [[GraphViewRepresentationNode]] = [[GraphViewRepresentationNode(currentNode: startNode, previousNode: startNode)]]
-        graphViewRepresentation.append([]) // adding a empty layer for things to be pushed
-        
-        var atLayer = 0
-        while(true){
-            let nextLayer = atLayer + 1
-            
-            var hasNextLayer: Bool = false
-            for _node in graphViewRepresentation[atLayer]{
-                let currentNode = _node.currentNode
-                let connectedNodes = connected_node(node_id: currentNode)
-                
-                for connectedNode in connectedNodes{
-                    hasNextLayer = true
-                    graphViewRepresentation[nextLayer].append(GraphViewRepresentationNode(currentNode: currentNode, previousNode: connectedNode))
-                }
-            }
-            
-            if !hasNextLayer{
-                break
-            }
-            graphViewRepresentation.append([]) // adding a empty layer for things to be pushed
-            atLayer += 1
-        }
-        return graphViewRepresentation
-    }
-    
     var body: some View {
         VStack{
             Text("\(edges.results.count)")
             Text("\(nodes.results.count)")
             Text("\(graph.count)")
+            Button(action: {print(makeGraphRepresentation().count)}, label: {Text("Press me to make graph")})
+
             ZStack(alignment: .topLeading) {
                 
                 Rectangle()
@@ -154,17 +127,58 @@ struct GraphView: View {
         return graph
     }
     
-    func connected_node(node_id: Int) -> [Int]{
+    func connected_node(node_id: Int, graph: [[Int]]) -> [Int]{
         var _connectedTo: [Int] = []
+        var atNode = 0
         for someNode in graph[node_id]{
             if someNode != 0 {
-                _connectedTo.append(someNode)
+                _connectedTo.append(atNode)
             }
+            atNode += 1
         }
         
         return _connectedTo
     }
     
+    func makeGraphRepresentation() -> [[GraphViewRepresentationNode]] {
+        // [layers][nodes]
+        var graphViewRepresentation: [[GraphViewRepresentationNode]] = [[GraphViewRepresentationNode(currentNode: startNode, previousNode: startNode)]]
+        let graph = graph
+        
+        var atLayer = 0
+
+        while(true){
+            let nextLayer = atLayer + 1
+            graphViewRepresentation.append([]) // adding a empty layer for things to be pushed
+            
+            var should_break: Bool = true
+            for _node in graphViewRepresentation[atLayer]{
+                let connectedNodes = connected_node(node_id: _node.currentNode, graph: graph)
+                if connectedNodes.count > 0{
+                    should_break = false
+                }
+            }
+            
+            if should_break{
+                break
+            }
+            
+            for _node in graphViewRepresentation[atLayer]{
+                let currentNode = _node.currentNode
+                let connectedNodes = connected_node(node_id: currentNode, graph: graph)
+                
+                for connectedNode in connectedNodes{
+                    graphViewRepresentation[nextLayer].append(GraphViewRepresentationNode(currentNode: connectedNode, previousNode: currentNode))
+                }
+            }
+            
+            
+            atLayer += 1
+        }
+        
+        return graphViewRepresentation
+    }
+   
     init(start_node: Int){
         _nodes = BlackbirdLiveModels({ db in
             try await Node.read(from: db,

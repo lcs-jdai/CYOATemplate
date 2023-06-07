@@ -129,29 +129,6 @@ struct GraphView: View {
                                 sqlWhere: "id > 0")
         })
         
-        
-        // creating the graph datastructure
-//        let node_count = _nodes.wrappedValue.results.count
-//        var graph = make_graph(node_count: node_count + 1 ) // since the node starts at one
-//
-//        for edge in _edges.wrappedValue.results{
-//            let from_node_id = edge.from_node_id
-//            let to_node_id = edge.to_node_id
-//            graph[from_node_id][to_node_id] = 1 // represents the weight (this really should be something else)!
-//            graph[to_node_id][from_node_id] = 1
-//        }
-//
-//        // print out the graph
-//        for i in 0..<graph.count{
-//            for x in 0..<graph[i].count{
-//                if graph[i][x] != 0 {
-//                    print("\(i): \(x) weight: \(graph[i][x])") // i, and x is connected and
-//                }
-//            }
-//        }
-//
-        
-        print("screen width: \(screenWidth) screen height: \(screenHeight)")
     }
     
 }

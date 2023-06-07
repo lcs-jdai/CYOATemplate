@@ -89,7 +89,6 @@ struct GraphView: View {
             let from_node = edge.from_node_id
             let to_node = edge.to_node_id
             graph[from_node][to_node] = 1
-            graph[to_node][from_node] = 1
         }
         
         return graph

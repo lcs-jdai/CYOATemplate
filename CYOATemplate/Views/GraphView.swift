@@ -43,9 +43,31 @@ let screenHeight = screenSize.height - 40
 struct GraphView: View {
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
-        
+    
     private var graph : [[Int]]{
         return make_graph(node_count: nodes.results.count, nodes: nodes, edges:edges)
+    }
+    
+    private var weights: [Int]{
+        var weights: [Int] = [] // this represents the weight of the nodes
+        // allocate space for weights - change this to a member function
+        for _ in 0...nodes.results.count{
+            weights.append(1)
+        }
+        weights.reserveCapacity(nodes.results.count + 1)
+        
+        for node in nodes.results{
+            let id = node.node_id
+            var visit_count = node.visit_count
+            
+            if visit_count == 0{
+                visit_count = 1
+            }
+            
+            weights[id] = visit_count
+        }
+        
+        return weights
     }
     
     var body: some View {
@@ -84,6 +106,8 @@ struct GraphView: View {
                 graph[i].append(0)
             }
         }
+        
+        // loading all the nodes into a list for quick loopup
         
         for edge in edges.results{
             let from_node = edge.from_node_id

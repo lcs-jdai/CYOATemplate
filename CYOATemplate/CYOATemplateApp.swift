@@ -11,7 +11,7 @@ import SwiftUI
 struct CYOATemplateApp: App {
     var body: some Scene {
         WindowGroup {
-            GraphView()
+            GraphView(start_node: 1)
                 .environment(\.blackbirdDatabase, AppDatabase.instance)
 //            GameView()
 //                // Make the database available to all other view through the environment

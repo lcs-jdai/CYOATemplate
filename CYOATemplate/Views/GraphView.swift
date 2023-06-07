@@ -41,6 +41,10 @@ let screenWidth = screenSize.width - 40
 let screenHeight = screenSize.height - 40
 
 
+struct GraphViewRepresentationNode{
+    let currentNode: Int
+    let previousNode: Int // for backtracking and drawing line
+}
 struct GraphView: View {
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
@@ -72,6 +76,36 @@ struct GraphView: View {
         return weights
     }
     
+    
+    private var graphViewRepresentation: [[GraphViewRepresentationNode]]{
+        // [layers][nodes]
+        var graphViewRepresentation: [[GraphViewRepresentationNode]] = [[GraphViewRepresentationNode(currentNode: startNode, previousNode: startNode)]]
+        graphViewRepresentation.append([]) // adding a empty layer for things to be pushed
+        
+        var atLayer = 0
+        while(true){
+            let nextLayer = atLayer + 1
+            
+            var hasNextLayer: Bool = false
+            for _node in graphViewRepresentation[atLayer]{
+                let currentNode = _node.currentNode
+                let connectedNodes = connected_node(node_id: currentNode)
+                
+                for connectedNode in connectedNodes{
+                    hasNextLayer = true
+                    graphViewRepresentation[nextLayer].append(GraphViewRepresentationNode(currentNode: currentNode, previousNode: connectedNode))
+                }
+            }
+            
+            if !hasNextLayer{
+                break
+            }
+            graphViewRepresentation.append([]) // adding a empty layer for things to be pushed
+            atLayer += 1
+        }
+        return graphViewRepresentation
+    }
+    
     var body: some View {
         VStack{
             Text("\(edges.results.count)")
@@ -81,17 +115,17 @@ struct GraphView: View {
                 
                 Rectangle()
                     .fill(.white)
-
+                
                 VertexView(
                     radius: 16,
                     color: .black,
                     coordinate: CGPoint(x: screenWidth, y: screenHeight))
-
+                
                 EdgeShape(
                     start: CGPoint(x: screenWidth, y: screenHeight),
                     end: CGPoint(x: 0, y: 0))
                 .stroke()
-
+                
                 VertexView(
                     radius: 16,
                     color: .red,
@@ -118,6 +152,17 @@ struct GraphView: View {
         }
         
         return graph
+    }
+    
+    func connected_node(node_id: Int) -> [Int]{
+        var _connectedTo: [Int] = []
+        for someNode in graph[node_id]{
+            if someNode != 0 {
+                _connectedTo.append(someNode)
+            }
+        }
+        
+        return _connectedTo
     }
     
     init(start_node: Int){

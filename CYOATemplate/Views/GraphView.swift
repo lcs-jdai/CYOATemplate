@@ -42,45 +42,39 @@ let screenHeight = screenSize.height - 40
 
 struct GraphView: View {
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
-    
-    private var realNodes: [Int] {
-        var results: [Int] = []
-        for node in nodes.results{
-            results.append(node.id)
-        }
-        return results
+    @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
+    private var graph : [[Int]]{
+        return make_graph(node_count: nodes.results.count, nodes: nodes, edges:edges)
     }
     
     var body: some View {
         VStack{
-            Text("Wa chao")
-            ForEach(0..<realNodes.count, id: \.self){ num in
-                Text("\(realNodes[num])")
+            Text("\(edges.results.count)")
+            Text("\(nodes.results.count)")
+            ZStack(alignment: .topLeading) {
                 
+                Rectangle()
+                    .fill(.white)
+
+                VertexView(
+                    radius: 16,
+                    color: .black,
+                    coordinate: CGPoint(x: screenWidth, y: screenHeight))
+
+                EdgeShape(
+                    start: CGPoint(x: screenWidth, y: screenHeight),
+                    end: CGPoint(x: 0, y: 0))
+                .stroke()
+
+                VertexView(
+                    radius: 16,
+                    color: .red,
+                    coordinate: CGPoint(x: 0, y: 0))
             }
         }
-//        ZStack(alignment: .topLeading) {
-//            Rectangle()
-//                .fill(.white)
-//
-//            VertexView(
-//                radius: 16,
-//                color: .black,
-//                coordinate: CGPoint(x: screenWidth, y: screenHeight))
-//
-//            EdgeShape(
-//                start: CGPoint(x: screenWidth, y: screenHeight),
-//                end: CGPoint(x: 0, y: 0))
-//            .stroke()
-//
-//            VertexView(
-//                radius: 16,
-//                color: .red,
-//                coordinate: CGPoint(x: 0, y: 0))
-//        }
     }
     
-    func make_graph(node_count: Int) -> [[Int]]{
+    func make_graph(node_count: Int, nodes: Blackbird.LiveResults<Node>, edges: Blackbird.LiveResults<Edge>) -> [[Int]]{
         var graph: [[Int]] = []
         for i in 0..<node_count{
             graph.append([])
@@ -89,12 +83,18 @@ struct GraphView: View {
             }
         }
         
+        
         return graph
     }
     
     init(start_node: Int){
         _nodes = BlackbirdLiveModels({ db in
             try await Node.read(from: db,
+                                sqlWhere: "id > 0")
+        })
+        
+        _edges = BlackbirdLiveModels({ db in
+            try await Edge.read(from: db,
                                 sqlWhere: "id > 0")
         })
         

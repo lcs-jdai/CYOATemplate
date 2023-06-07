@@ -13,6 +13,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
+    @State var textSize: Int = 20
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
@@ -27,13 +28,22 @@ struct GameView: View {
                 HStack {
                     Text("\(currentNodeId)")
                         .font(.largeTitle)
+                        .padding(.top,40)
+                        .padding(.horizontal,20)
+
+
                     Spacer()
                 }
                 
                 NodeView(currentNodeId: currentNodeId)
+                    .font(.system(size: CGFloat(textSize)))
+                    .padding(20)
+
                 Divider()
                 
                 EdgesView(currentNodeId: $currentNodeId)
+                    .font(.system(size: CGFloat(textSize)))
+                    .padding(20)
                 Spacer()
                 
                 HStack{
@@ -61,6 +71,7 @@ struct GameView: View {
                             withAnimation{
                                 buttonSwitch2.toggle()
                                 showMenu.toggle()
+
                             }
                         }
                     //                Button(action: {}, label: {
@@ -76,6 +87,7 @@ struct GameView: View {
                             withAnimation{
                                 isDarkMode.toggle()
                                 buttonSwitch2.toggle()
+
                             }
                         }
                     Spacer()
@@ -96,6 +108,10 @@ struct GameView: View {
             if showMenu {
                 PopUpMenu()
                 .padding(.bottom, 120)
+            }
+            if showTextMenu{
+                textMenu(textSize: 20)
+                    .padding(.bottom, 120)
             }
         }
         .padding()
@@ -123,6 +139,7 @@ struct tabMenuIcon:View{
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
             .foregroundColor(buttonSwitch2 ? .black : .white)
+
     }
 }
 
@@ -135,17 +152,23 @@ struct tabIcon1:View{
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
             .foregroundColor(buttonSwitch2 ? .black : .white)
+
+
+
+
     }
 }
 
 struct tabIcon2:View{
     @Binding var buttonSwitch2: Bool
+
     var body: some View{
         Image(systemName: buttonSwitch2 ? "moon.zzz" : "sun.max")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
             .foregroundColor(buttonSwitch2 ? .black : .white)
+
     }
 }
 
@@ -160,6 +183,47 @@ struct PopUpMenu: View{
         }
         .transition(.scale)
         .padding(.horizontal,40)
+
+    }
+}
+
+
+struct textMenu: View{
+    @State var textSize: Int
+    var body: some View{
+        HStack{
+            Button(action: {
+                textSize += 1
+            }, label: {
+
+                Image(systemName: "plus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 30,height: 20)
+                    .foregroundColor(.blue)
+
+            })
+            
+            Spacer()
+            
+            Text("\(textSize)")
+                .font(.system(size: 20))
+            
+            Spacer()
+            
+            Button(action: {
+                textSize -= 1
+            }, label: {
+                Image(systemName: "minus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 3.5,height: 3.5)
+                    .foregroundColor(.blue)
+            })
+        }
+        .transition(.scale)
+        .padding(.horizontal,40)
+        .padding(.trailing,27)
 
     }
 }

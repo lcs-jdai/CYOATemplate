@@ -9,11 +9,13 @@ import Blackbird
 import SwiftUI
 import UIKit
 import Combine
+import AVFoundation
 
 struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
+    @State var textSize:Int = 20
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
@@ -21,12 +23,14 @@ struct GameView: View {
 //    @State var tM: textMenu = textMenu(textSize: Int)
     @AppStorage("isDarkMode") private var isDarkMode:Bool = false
     @Environment(\.presentationMode) var presentationMode
+
+    @State var nodeHistory: [Int]  = [1] // may be changed into a deque later on
+
     
     // MARK: Computed properties
     var body: some View {
         ZStack(alignment: .bottom){
             VStack(spacing: 10) {
-                
                 HStack {
                     Text("\(currentNodeId)")
                         .font(.largeTitle)
@@ -93,13 +97,40 @@ struct GameView: View {
                 TextMenu(textSize: $textSize)
                     .padding(.bottom, 120)
             }
+            .frame(height: UIScreen.main.bounds.height / 10)
+            .frame(width: UIScreen.main.bounds.width / 1)
+            .background(Color(.systemGray5))
+
+            EdgesView(currentNodeId: $currentNodeId, nodeHistories: $nodeHistory)
+                        
+            Spacer()
+            
+            // play background music in swift
+            Button(action: {playSound()}, label: {Text("Play Background Music")})
         }
         .padding()
         .ignoresSafeArea()
         .preferredColorScheme(isDarkMode ? .dark:.light)
         
     }
+
+    func playSound(){
         
+        let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")
+        
+        guard let url = url else {
+            print("Cannot find file background music!")
+            return
+        }
+        do{
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = -1
+            player?.play()
+        }catch{
+            
+        }
+        
+    }
 }
 
 struct GameView_Previews: PreviewProvider {

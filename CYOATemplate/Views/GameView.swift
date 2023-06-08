@@ -30,6 +30,7 @@ struct GameView: View {
     var body: some View {
         //        ZStack(alignment: .bottom){
         VStack(spacing: 10) {
+            Spacer()
             HStack {
                 Text("\(currentNodeId)")
                     .font(.largeTitle)
@@ -56,12 +57,12 @@ struct GameView: View {
             // Menu Bar
             if showMenu {
                 PopUpMenu()
-                    .padding(.bottom, 120)
+                    .padding(.vertical,20)
             }
             
             if showTextMenu{
                 TextMenu(textSize: $textSize)
-                    .padding(.bottom, 120)
+                    .padding(.vertical,20)
             }
             
             HStack{

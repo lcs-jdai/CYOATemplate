@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41601B2F2A2ED82B00D0B483 /* Brightness Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41601B2E2A2ED82B00D0B483 /* Brightness Slider.swift */; };
 		41601B312A3205FB00D0B483 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41601B302A3205FB00D0B483 /* Color.swift */; };
 		81C198A92A251ABB0047A4B3 /* CYOATemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */; };
 		81C198AD2A251ABC0047A4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C198AC2A251ABC0047A4B3 /* Assets.xcassets */; };
@@ -28,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		41601B2E2A2ED82B00D0B483 /* Brightness Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brightness Slider.swift"; sourceTree = "<group>"; };
 		41601B302A3205FB00D0B483 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		81C198A52A251ABB0047A4B3 /* CYOATemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CYOATemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYOATemplateApp.swift; sourceTree = "<group>"; };
@@ -60,14 +58,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		41601B2B2A2ED76E00D0B483 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				41601B2E2A2ED82B00D0B483 /* Brightness Slider.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		81C1989C2A251ABB0047A4B3 = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +79,6 @@
 			children = (
 				E59F059B2A2ED2150016ECB5 /* background_music.wav */,
 				81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */,
-				41601B2B2A2ED76E00D0B483 /* Extensions */,
 				81C784A72A28AB26001BC867 /* Helpers */,
 				81C198B62A251ACD0047A4B3 /* Model */,
 				81C198B72A251AD10047A4B3 /* Views */,
@@ -224,7 +213,6 @@
 				81C784A92A28AB38001BC867 /* AppDatabase.swift in Sources */,
 				81C198BD2A251B2B0047A4B3 /* Edge.swift in Sources */,
 				41601B312A3205FB00D0B483 /* Color.swift in Sources */,
-				41601B2F2A2ED82B00D0B483 /* Brightness Slider.swift in Sources */,
 				E5DE3B352A300D250019E17B /* GraphView.swift in Sources */,
 				81C198A92A251ABB0047A4B3 /* CYOATemplateApp.swift in Sources */,
 				81C784AF2A28B4E7001BC867 /* EdgesView.swift in Sources */,

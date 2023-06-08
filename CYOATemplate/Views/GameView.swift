@@ -19,101 +19,99 @@ struct GameView: View {
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
-    @State private var textSize = 20
-//    @State var tM: textMenu = textMenu(textSize: Int)
+    //    @State var tM: textMenu = textMenu(textSize: Int)
     @AppStorage("isDarkMode") private var isDarkMode:Bool = false
     @Environment(\.presentationMode) var presentationMode
-
+    
     @State var nodeHistory: [Int]  = [1] // may be changed into a deque later on
-
+    
     
     // MARK: Computed properties
     var body: some View {
-        ZStack(alignment: .bottom){
-            VStack(spacing: 10) {
-                HStack {
-                    Text("\(currentNodeId)")
-                        .font(.largeTitle)
-                        .padding(.top,40)
-                        .padding(.horizontal,20)
-
-
-                    Spacer()
-                }
+        //        ZStack(alignment: .bottom){
+        VStack(spacing: 10) {
+            HStack {
+                Text("\(currentNodeId)")
+                    .font(.largeTitle)
+                    .padding(.top,40)
+                    .padding(.horizontal,20)
                 
-                NodeView(currentNodeId: currentNodeId)
-                    .font(.system(size: CGFloat(textSize)))
-                    .padding(20)
-
-                Divider()
                 
-                EdgesView(currentNodeId: $currentNodeId)
-                    .font(.system(size: CGFloat(textSize)))
-                    .padding(20)
                 Spacer()
-                
-                HStack{
-                    Spacer()
-                    
-                    tabIcon1(showTextMenu: $showTextMenu, buttonSwitch2: $buttonSwitch2)
-                        .onTapGesture {
-                            withAnimation{
-                                showTextMenu.toggle()
-                                buttonSwitch2.toggle()
-                            }
-                        }
-                    
-                    Spacer()
-                    tabMenuIcon(showMenu: $showMenu, buttonSwitch2: $buttonSwitch2)
-                        .onTapGesture {
-                            withAnimation{
-                                buttonSwitch2.toggle()
-                                showMenu.toggle()
-
-                            }
-                        }
-                 
-                    Spacer()
-                    tabIcon2(buttonSwitch2: $buttonSwitch2)
-                        .onTapGesture {
-                            withAnimation{
-                                isDarkMode.toggle()
-                                buttonSwitch2.toggle()
-
-                            }
-                        }
-                    Spacer()
-                  
-                }
-                .frame(height: UIScreen.main.bounds.height / 10)
-                .frame(width: UIScreen.main.bounds.width / 1)
-                .background(Color(.systemGray5))
             }
+            
+            NodeView(currentNodeId: currentNodeId)
+                .font(.system(size: CGFloat(textSize)))
+                .padding(20)
+            
+            Divider()
+            
+            EdgesView(currentNodeId: $currentNodeId, nodeHistories: $nodeHistory)
+                .font(.system(size: CGFloat(textSize)))
+                .padding(20)
+            Spacer()
+
+            Button(action: {playSound()}, label: {Text("Play Background Music")})
+
+            // Menu Bar
             if showMenu {
                 PopUpMenu()
-                .padding(.bottom, 120)
+                    .padding(.bottom, 120)
             }
+            
             if showTextMenu{
                 TextMenu(textSize: $textSize)
                     .padding(.bottom, 120)
+            }
+            
+            HStack{
+                Spacer()
+                
+                tabIcon1(showTextMenu: $showTextMenu, buttonSwitch2: $buttonSwitch2)
+                    .onTapGesture {
+                        withAnimation{
+                            showTextMenu.toggle()
+                            buttonSwitch2.toggle()
+                        }
+                    }
+                
+                Spacer()
+                tabMenuIcon(showMenu: $showMenu, buttonSwitch2: $buttonSwitch2)
+                    .onTapGesture {
+                        withAnimation{
+                            buttonSwitch2.toggle()
+                            showMenu.toggle()
+                            
+                        }
+                    }
+                
+                Spacer()
+                tabIcon2(buttonSwitch2: $buttonSwitch2)
+                    .onTapGesture {
+                        withAnimation{
+                            isDarkMode.toggle()
+                            buttonSwitch2.toggle()
+                            
+                        }
+                    }
+                Spacer()
+                
             }
             .frame(height: UIScreen.main.bounds.height / 10)
             .frame(width: UIScreen.main.bounds.width / 1)
             .background(Color(.systemGray5))
 
-            EdgesView(currentNodeId: $currentNodeId, nodeHistories: $nodeHistory)
-                        
-            Spacer()
-            
             // play background music in swift
-            Button(action: {playSound()}, label: {Text("Play Background Music")})
         }
+        
+        //        }
+        
         .padding()
         .ignoresSafeArea()
         .preferredColorScheme(isDarkMode ? .dark:.light)
         
     }
-
+    
     func playSound(){
         
         let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")
@@ -137,7 +135,7 @@ struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
         // Make the database available to all other view through the environment
-        .environment(\.blackbirdDatabase, AppDatabase.instance)
+            .environment(\.blackbirdDatabase, AppDatabase.instance)
     }
 }
 
@@ -150,7 +148,7 @@ struct tabMenuIcon:View{
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
             .foregroundColor(buttonSwitch2 ? .white : .black)
-
+        
     }
 }
 
@@ -163,23 +161,23 @@ struct tabIcon1:View{
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
             .foregroundColor(buttonSwitch2 ? .white : .black)
-
-
-
-
+        
+        
+        
+        
     }
 }
 
 struct tabIcon2:View{
     @Binding var buttonSwitch2: Bool
-
+    
     var body: some View{
         Image(systemName: buttonSwitch2 ? "moon.zzz" : "sun.max")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 30,height: 20)
             .foregroundColor(buttonSwitch2 ? .white : .black)
-
+        
     }
 }
 
@@ -197,7 +195,7 @@ struct PopUpMenu: View{
         }
         .transition(.scale)
         .padding(.horizontal,40)
-
+        
     }
 }
 
@@ -209,13 +207,13 @@ struct TextMenu: View{
             Button(action: {
                 textSize += 1
             }, label: {
-
+                
                 Image(systemName: "plus")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 30,height: 20)
                     .foregroundColor(.blue)
-
+                
             })
             
             Spacer()
@@ -238,6 +236,6 @@ struct TextMenu: View{
         .transition(.scale)
         .padding(.horizontal,40)
         .padding(.trailing,27)
-
+        
     }
 }

@@ -38,7 +38,7 @@ struct VertexView: View {
 
 let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width
-let screenHeight = screenSize.height
+let screenHeight = screenSize.height - 30
 
 
 struct GraphViewRepresentationNode{

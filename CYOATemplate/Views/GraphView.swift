@@ -87,7 +87,7 @@ struct GraphView: View {
             Text("\(nodes.results.count)")
             Text("\(graph.count)")
             Text("\(graphRepresentation.count)")
-            Button(action: {}, label: {Text("Press me to make graph")})
+            Button(action: {make_draw_node()}, label: {Text("Press me to make graph")})
 
             ZStack(alignment: .topLeading) {
                 
@@ -110,6 +110,26 @@ struct GraphView: View {
                     coordinate: CGPoint(x: 0, y: 0))
             }
         }
+    }
+    
+    func make_draw_node(){
+        let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count)) // get the delta y distance
+        let radius = delta_y / 2 - 1
+
+        var circles: [(Int, Int)] = []
+        for i in 1...graphRepresentation.count{
+            let eachRow = graphRepresentation[i - 1]
+            let delta_x = Int(Double(screenWidth) / Double(eachRow.count))
+            
+            
+            for x in 1...eachRow.count{
+                let xPos = x * delta_x
+                let yPos = i * delta_y
+                circles.append((xPos, yPos))
+            }
+        }
+        
+        print(circles)
     }
     
     func make_graph(node_count: Int, nodes: Blackbird.LiveResults<Node>, edges: Blackbird.LiveResults<Edge>) -> [[Int]]{

@@ -156,7 +156,6 @@ struct GraphView: View {
     
     func make_draw_node() -> [CircleData]{
         let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count + 2)) // get the delta y distance
-        let radius = delta_y / 2 - 5
 
         var circles: [CircleData] = []
         for i in 1...graphRepresentation.count{

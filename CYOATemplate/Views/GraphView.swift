@@ -91,9 +91,7 @@ struct GraphView: View {
         return make_draw_node()
     }
     
-    private var edgeLocation: [(Int, Int, Int, Int)] {
-        update_
-    }
+    @State private var edgeLocation: [(Int, Int, Int, Int)] = []
     
     var body: some View {
         VStack{
@@ -101,7 +99,7 @@ struct GraphView: View {
 //            Text("\(nodes.results.count)")
 //            Text("\(graph.count)")
 //            Text("\(graphRepresentation.count)")
-            Button(action: {update_edge_location()}, label: {Text("Hello")})
+            Button(action: {update_edge_location()}, label: {Text("Draw Edges")})
 
             ZStack(alignment: .topLeading) {
                 Rectangle()
@@ -139,8 +137,7 @@ struct GraphView: View {
         return (0, 0)
     }
     
-    func update_edge_location() -> [(Int)]{
-        print("Hi")
+    func update_edge_location() {
         var nodes_path: [(Int, Int, Int, Int)] = []
         let graphRepresentation = graphRepresentation
         for row in graphRepresentation{
@@ -153,9 +150,8 @@ struct GraphView: View {
                 nodes_path.append((current_node_loc.0, current_node_loc.1, previous_node_loc.0, previous_node_loc.1))
             }
         }
-        print("Done")
+        
         edgeLocation = nodes_path
-        print(edgeLocation)
     }
     
     func make_draw_node() -> [CircleData]{

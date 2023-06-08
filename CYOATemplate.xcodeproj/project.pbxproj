@@ -21,6 +21,7 @@
 		81C784AF2A28B4E7001BC867 /* EdgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C784AE2A28B4E7001BC867 /* EdgesView.swift */; };
 		E59F059C2A2ED2150016ECB5 /* background_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = E59F059B2A2ED2150016ECB5 /* background_music.wav */; };
 		E59F059E2A2ED3FF0016ECB5 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F059D2A2ED3FF0016ECB5 /* Audio.swift */; };
+		E5DE3B352A300D250019E17B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3B342A300D250019E17B /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		81C784AE2A28B4E7001BC867 /* EdgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesView.swift; sourceTree = "<group>"; };
 		E59F059B2A2ED2150016ECB5 /* background_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_music.wav; sourceTree = "<group>"; };
 		E59F059D2A2ED3FF0016ECB5 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		E5DE3B342A300D250019E17B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				81C198B82A251AE00047A4B3 /* GameView.swift */,
 				81C784AA2A28AD0B001BC867 /* NodeView.swift */,
 				81C784AE2A28B4E7001BC867 /* EdgesView.swift */,
+				E5DE3B342A300D250019E17B /* GraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				81C198B92A251AE00047A4B3 /* GameView.swift in Sources */,
 				81C784A92A28AB38001BC867 /* AppDatabase.swift in Sources */,
 				81C198BD2A251B2B0047A4B3 /* Edge.swift in Sources */,
+				E5DE3B352A300D250019E17B /* GraphView.swift in Sources */,
 				81C198A92A251ABB0047A4B3 /* CYOATemplateApp.swift in Sources */,
 				81C784AF2A28B4E7001BC867 /* EdgesView.swift in Sources */,
 				81C784AB2A28AD0B001BC867 /* NodeView.swift in Sources */,

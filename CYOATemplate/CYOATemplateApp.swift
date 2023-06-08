@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 @main
 struct CYOATemplateApp: App {
-
+    
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -21,52 +22,41 @@ struct CYOATemplateApp: App {
                 
                 GraphView(start_node: 1)
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
-                            .tabItem {
-                                Label("Graph", systemImage: "map")
-                            }
-//
-//                Text("Settings")
-//                    .environment(\.blackbirdDatabase, AppDatabase.instance)
-//                            .tabItem {
-//                                Label("Settings", systemImage: "gear")
-//                            }
+                    .tabItem {
+                        Label("Graph", systemImage: "map")
+                    }
                 
-                Text("Dark Mode")
+                Text("Settings")
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
                     .tabItem {
-                                Label("DarkMode", systemImage: "moon.zzz")
-                            }
-                    .foregroundColor(Color.black)
-                       
-                    
-
+                        Label("Settings", systemImage: "gear")
+                    }
+                
+                
             }
-
-//            NavigationView{
-//                VStack{
-//                    NavigationLink(destination: {
-//
-//                    }, label: {
-//                        Text("Graph View")
-//                            .font(.system(size: 20, weight: .semibold, design: .rounded))
-//                            .frame(width:200, height: 60)
-//                            .background(Color.white)
-//                            .shadow(color: Color.gray, radius: 20,x: 20,y: 20)
-//                            .shadow(color: Color.white, radius: 20,x: -20,y: -20)
-//
-//                    })
-//                    NavigationLink(destination: {GameView()
-//                            .environment(\.blackbirdDatabase, AppDatabase.instance)
-//                    }, label: {
-//                        Text("Game View")
-//                            .font(.system(size: 20, weight: .semibold, design: .rounded))
-//                            .frame(width:200, height: 60)
-//                            .background(Color.white)
-//                            .shadow(color: Color.gray, radius: 20,x: 20,y: 20)
-//                            .shadow(color: Color.white, radius: 20,x: -20,y: -20)
-//                    })
-//                }
-//            }
+            .onAppear{
+//                playSound()
+            }
         }
+    }
+    
+    
+    // play sound
+    func playSound(){
+        
+        let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")
+        
+        guard let url = url else {
+            print("Cannot find file background music!")
+            return
+        }
+        do{
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = -1
+            player?.play()
+        }catch{
+            
+        }
+        
     }
 }

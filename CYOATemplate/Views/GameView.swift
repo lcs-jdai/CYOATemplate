@@ -19,11 +19,10 @@ struct GameView: View {
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
-    //    @State var tM: textMenu = textMenu(textSize: Int)
-    @AppStorage("isDarkMode") private var isDarkMode:Bool = false
+    @AppStorage("isDarkMode") private var isDarkMode:Bool = true
     @Environment(\.presentationMode) var presentationMode
     
-    @State var nodeHistory: [Int]  = [1] // may be changed into a deque later on
+    @State var nodeHistory: [Int]  = [1]
     
     
     // MARK: Computed properties
@@ -39,11 +38,11 @@ struct GameView: View {
                 
                 Spacer()
             }
-                        
+            
             NodeView(currentNodeId: currentNodeId)
                 .font(.system(size: CGFloat(textSize)))
                 .padding(20)
-
+            
             
             Divider()
             
@@ -51,62 +50,60 @@ struct GameView: View {
                 .font(.system(size: CGFloat(textSize)))
                 .padding(20)
             Spacer()
-
-            Button(action: {playSound()}, label: {Text("Play Background Music")})
-                .padding(.bottom,20)
-
-            // Menu Bar
-            if showMenu {
-                PopUpMenu()
-                    .padding(.bottom,20)
-            }
             
-            if showTextMenu{
-                TextMenu(textSize: $textSize)
-                    .padding(.bottom,20)
-            }
+            //            Button(action: {playSound()}, label: {Text("Play Background Music")})
+            //                .padding(.bottom,20)
+            //
+            //            // Menu Bar
+            //            if showMenu {
+            //                PopUpMenu()
+            //                    .padding(.bottom,20)
+            //            }
+            //
+            //            if showTextMenu{
+            //                TextMenu(textSize: $textSize)
+            //                    .padding(.bottom,20)
+            //            }
+            //
+            //            HStack{
+            //                Spacer()
+            //
+            //                tabIcon1(showTextMenu: $showTextMenu, buttonSwitch2: $buttonSwitch2)
+            //                    .onTapGesture {
+            //                        withAnimation{
+            //                            showTextMenu.toggle()
+            //                            buttonSwitch2.toggle()
+            //                        }
+            //                    }
+            //
+            //                Spacer()
+            //                tabMenuIcon(showMenu: $showMenu, buttonSwitch2: $buttonSwitch2)
+            //                    .onTapGesture {
+            //                        withAnimation{
+            //                            buttonSwitch2.toggle()
+            //                            showMenu.toggle()
+            //
+            //                        }
+            //                    }
+            //
+            //                Spacer()
+            //                tabIcon2(buttonSwitch2: $buttonSwitch2)
+            //                    .onTapGesture {
+            //                        withAnimation{
+            //                            isDarkMode.toggle()
+            //                            buttonSwitch2.toggle()
+            //
+            //                        }
+            //                    }
+            //                Spacer()
             
-            HStack{
-                Spacer()
-                
-                tabIcon1(showTextMenu: $showTextMenu, buttonSwitch2: $buttonSwitch2)
-                    .onTapGesture {
-                        withAnimation{
-                            showTextMenu.toggle()
-                            buttonSwitch2.toggle()
-                        }
-                    }
-                
-                Spacer()
-                tabMenuIcon(showMenu: $showMenu, buttonSwitch2: $buttonSwitch2)
-                    .onTapGesture {
-                        withAnimation{
-                            buttonSwitch2.toggle()
-                            showMenu.toggle()
-                            
-                        }
-                    }
-                
-                Spacer()
-                tabIcon2(buttonSwitch2: $buttonSwitch2)
-                    .onTapGesture {
-                        withAnimation{
-                            isDarkMode.toggle()
-                            buttonSwitch2.toggle()
-                            
-                        }
-                    }
-                Spacer()
-                
-            }
-            .frame(height: UIScreen.main.bounds.height / 10)
-            .frame(width: UIScreen.main.bounds.width / 1)
-            .background(Color(.systemGray5))
-
-            // play background music in swift
+            //            }
+            //            .frame(height: UIScreen.main.bounds.height / 10)
+            //            .frame(width: UIScreen.main.bounds.width / 1)
+            //            .background(Color(.systemGray5))
+            
+            Spacer()
         }
-        
-        //        }
         
         .padding()
         .ignoresSafeArea()
@@ -114,23 +111,6 @@ struct GameView: View {
         
     }
     
-    func playSound(){
-        
-        let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")
-        
-        guard let url = url else {
-            print("Cannot find file background music!")
-            return
-        }
-        do{
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.numberOfLoops = -1
-            player?.play()
-        }catch{
-            
-        }
-        
-    }
 }
 
 struct GameView_Previews: PreviewProvider {

@@ -37,8 +37,8 @@ struct VertexView: View {
 }
 
 let screenSize: CGRect = UIScreen.main.bounds
-let screenWidth = screenSize.width - 40
-let screenHeight = screenSize.height - 40
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
 
 
 struct GraphViewRepresentationNode{
@@ -114,14 +114,18 @@ struct GraphView: View {
         }
     }
     
+    func make_draw_edge() -> [Int]{
+        return []
+    }
+    
     func make_draw_node() -> [CircleData]{
-        let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count)) // get the delta y distance
-        let radius = delta_y / 2 - 1
+        let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count + 2)) // get the delta y distance
+        let radius = delta_y / 2 - 5
 
         var circles: [CircleData] = []
         for i in 1...graphRepresentation.count{
             let eachRow = graphRepresentation[i - 1]
-            let delta_x = Int(Double(screenWidth) / Double(eachRow.count))
+            let delta_x = Int(Double(screenWidth) / Double(eachRow.count + 1))
             
             
             for x in 1...eachRow.count{

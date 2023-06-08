@@ -16,6 +16,8 @@ struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode:Bool = true
     
     @State private var isMusicOn: Bool = true
+    @State private var musicTogglePlacehoder: Bool = true
+    @State private var musicVolume: Float = 1.0
     
     // Control the audio level
     private var player: AVAudioPlayer
@@ -63,10 +65,6 @@ struct SettingsView: View {
             .frame(width: UIScreen.main.bounds.width / 1)
             .background(Color(.systemGray5))
             
-            Button(action: {stopMusic()}){
-                Text("Music On/Off")
-            }
-            
             // Pop up Menus
             if showMenu{
                 PopUpMenu()
@@ -76,8 +74,34 @@ struct SettingsView: View {
                 TextMenu(textSize: $textSize)
                     .padding(.bottom,20)
             }
+
+            List{
+                Section(header: Text("Music")){
+                    // turning on and off music
+                    Toggle("On / Off", isOn: $musicTogglePlacehoder)
+                        .onChange(of: musicTogglePlacehoder){ value in
+                            stopMusic()
+                        }
+                    // control the volume
+                    HStack{
+                        Text("Volume")
+                        Spacer()
+                        Slider(value: $musicVolume)
+                            .onChange(of: musicVolume){volume in
+                                changeMusicVolume()
+                            }
+                    }
+                    
+                }
+            }
+            
+            
             Spacer()
         }
+    }
+    
+    func changeMusicVolume(){
+        player.volume = musicVolume
     }
     
     func stopMusic() {

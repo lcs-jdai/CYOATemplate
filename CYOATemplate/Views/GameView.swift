@@ -8,18 +8,19 @@
 import Blackbird
 import SwiftUI
 import UIKit
+import Combine
 import AVFoundation
-
 
 struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
     @State var textSize:Int = 20
-
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
+    @State private var textSize = 20
+//    @State var tM: textMenu = textMenu(textSize: Int)
     @AppStorage("isDarkMode") private var isDarkMode:Bool = false
     @Environment(\.presentationMode) var presentationMode
 
@@ -93,7 +94,7 @@ struct GameView: View {
                 .padding(.bottom, 120)
             }
             if showTextMenu{
-                textMenu(textSize:20)
+                TextMenu(textSize: $textSize)
                     .padding(.bottom, 120)
             }
             .frame(height: UIScreen.main.bounds.height / 10)
@@ -188,7 +189,6 @@ struct PopUpMenu: View{
         HStack{
             Text("Brightness:")
             Slider(value: $brightness, in: 0.0...1.0){
-//                UIScreen.main.brightness = CGFloat(brightness)
             }
             .onChange(of: brightness){ _ in
                 UIScreen.main.brightness = CGFloat(brightness)
@@ -202,8 +202,8 @@ struct PopUpMenu: View{
 }
 
 
-struct textMenu: View{
-    @State var textSize: Int
+struct TextMenu: View{
+    @Binding var textSize: Int
     var body: some View{
         HStack{
             Button(action: {

@@ -49,7 +49,7 @@ struct GraphViewRepresentationNode{
 struct CircleData{
     let x: Int
     let y: Int
-    let isCircle: Bool
+    let node_id: Int
 }
 
 struct GraphView: View {
@@ -91,17 +91,30 @@ struct GraphView: View {
         return make_draw_node()
     }
     
+    private var edgeLocation: [(Int, Int, Int, Int)] {
+        update_
+    }
+    
     var body: some View {
         VStack{
 //            Text("\(edges.results.count)")
 //            Text("\(nodes.results.count)")
 //            Text("\(graph.count)")
 //            Text("\(graphRepresentation.count)")
-//            Button(action: {make_draw_node()}, label: {Text("Press me to make graph")})
+            Button(action: {update_edge_location()}, label: {Text("Hello")})
 
             ZStack(alignment: .topLeading) {
                 Rectangle()
                     .fill(.white)
+                
+                // rendering all the edges
+                ForEach(0..<edgeLocation.count, id: \.self){ num in
+                    EdgeShape(start: CGPoint(x: edgeLocation[num].0, y: edgeLocation[num].1),
+                              end: CGPoint(x: edgeLocation[num].2, y: edgeLocation[num].3))
+                    .stroke(.black, lineWidth: 2)
+                }
+                
+                // rendering all the cirlces
                 ForEach(0..<circleLocations.count, id: \.self){ num in
                     VertexView(
                         radius: 10,
@@ -115,6 +128,35 @@ struct GraphView: View {
         }
     }
     
+    func find_node_in_circle_data(node_id: Int) -> (Int, Int){
+        let location = circleLocations
+        for _node in location{
+            if _node.node_id == node_id{
+                return (_node.x, _node.y)
+            }
+        }
+        
+        return (0, 0)
+    }
+    
+    func update_edge_location() -> [(Int)]{
+        print("Hi")
+        var nodes_path: [(Int, Int, Int, Int)] = []
+        let graphRepresentation = graphRepresentation
+        for row in graphRepresentation{
+            for node in row{
+                let current_node = node.currentNode
+                let previous_node = node.previousNode
+                
+                let current_node_loc = find_node_in_circle_data(node_id: current_node)
+                let previous_node_loc = find_node_in_circle_data(node_id: previous_node)
+                nodes_path.append((current_node_loc.0, current_node_loc.1, previous_node_loc.0, previous_node_loc.1))
+            }
+        }
+        print("Done")
+        edgeLocation = nodes_path
+        print(edgeLocation)
+    }
     
     func make_draw_node() -> [CircleData]{
         let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count + 2)) // get the delta y distance
@@ -127,9 +169,10 @@ struct GraphView: View {
             
             
             for x in 1...eachRow.count{
+                // rendering all of the circles
                 let xPos = x * delta_x
                 let yPos = i * delta_y
-                circles.append(CircleData(x: xPos, y: yPos, isCircle: true))
+                circles.append(CircleData(x: xPos, y: yPos, node_id: graphRepresentation[i - 1][x - 1].currentNode))
             }
         }
         

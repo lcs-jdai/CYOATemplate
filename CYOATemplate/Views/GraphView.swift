@@ -26,11 +26,13 @@ struct EdgeShape: Shape {
 struct VertexView: View {
     let radius: Double
     let color: Color
+    let saturation: Double
     let coordinate: CGPoint
     
     var body: some View {
         Circle()
             .fill(color)
+            .saturation(saturation)
             .frame(width: radius * 2, height: radius * 2, alignment: .center)
             .offset(x: coordinate.x - radius, y: coordinate.y - radius)
     }
@@ -61,8 +63,12 @@ struct GraphView: View {
         return make_graph(node_count: nodes.results.count, nodes: nodes, edges:edges)
     }
     
-    private var weights: [Int]{
-        var weights: [Int] = [] // this represents the weight of the nodes
+    private var normalizedWeights: [Double]{
+        var weights: [Double] = [1.0, 1.0] // this represents the weight of the nodes
+        if nodes.results.count <= 0 {
+            return weights // when there is only one node!
+        }
+        
         // allocate space for weights - change this to a member function
         for _ in 0...nodes.results.count{
             weights.append(1)
@@ -77,9 +83,21 @@ struct GraphView: View {
                 visit_count = 1
             }
             
-            weights[id] = visit_count
+            weights[id] = Double(visit_count)
         }
         
+        // finding the maximum
+        var maxWeight = weights[0]
+        for _weigth in weights{
+            if _weigth > maxWeight{
+                maxWeight = _weigth
+            }
+        }
+        
+        // normalizing weight
+        for i in 0..<weights.count{
+            weights[i] = weights[i] / maxWeight
+        }
         return weights
     }
     
@@ -106,14 +124,15 @@ struct GraphView: View {
                 ForEach(0..<edgeLocation.count, id: \.self){ num in
                     EdgeShape(start: CGPoint(x: edgeLocation[num].0, y: edgeLocation[num].1),
                               end: CGPoint(x: edgeLocation[num].2, y: edgeLocation[num].3))
-                    .stroke(.black, lineWidth: 2)
+                    .stroke(.gray, lineWidth: 2)
                 }
                 
                 // rendering all the cirlces
                 ForEach(0..<circleLocations.count, id: \.self){ num in
                     VertexView(
                         radius: 10,
-                        color: CGColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0),
+                        color: .cyan,
+                        saturation: normalizedWeights[circleLocations[num].node_id],
                         coordinate: CGPoint(x: CGFloat(circleLocations[num].x), y: CGFloat(circleLocations[num].y))
                         )
 

@@ -30,7 +30,6 @@ struct CYOATemplateApp: App {
                                 Label("Settings", systemImage: "gear")
                             }
 
-
             }
 
 //            NavigationView{

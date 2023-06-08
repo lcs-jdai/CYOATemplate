@@ -15,7 +15,7 @@ struct SettingsView: View {
     @State private var buttonSwitch2 = true
     @AppStorage("isDarkMode") private var isDarkMode:Bool = true
     
-    private var isMusicOn: Bool = true
+    @State private var isMusicOn: Bool = true
     
     // Control the audio level
     private var player: AVAudioPlayer
@@ -83,11 +83,13 @@ struct SettingsView: View {
     func stopMusic() {
         if isMusicOn{
             player.stop()
+            isMusicOn = false
             return
         }
         
         player.numberOfLoops = -1
         player.play()
+        isMusicOn = true
     }
 }
 

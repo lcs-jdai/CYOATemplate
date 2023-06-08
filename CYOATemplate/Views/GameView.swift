@@ -15,15 +15,10 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
-    @State var textSize:Int = 15
-    @State private var showTextMenu = false
-    @State private var showMenu = false
-    @State private var buttonSwitch2 = true
-    @AppStorage("isDarkMode") private var isDarkMode:Bool = true
-    @Environment(\.presentationMode) var presentationMode
-    
     @State var nodeHistory: [Int]  = [1]
-    
+    // need to store the following
+    @AppStorage("isDarkMode") private var isDarkMode:Bool = true
+    @State var textSize:Int = 15
     
     // MARK: Computed properties
     var body: some View {
@@ -51,56 +46,7 @@ struct GameView: View {
                 .padding(20)
             Spacer()
             
-            //            Button(action: {playSound()}, label: {Text("Play Background Music")})
-            //                .padding(.bottom,20)
-            //
-            //            // Menu Bar
-            //            if showMenu {
-            //                PopUpMenu()
-            //                    .padding(.bottom,20)
-            //            }
-            //
-            //            if showTextMenu{
-            //                TextMenu(textSize: $textSize)
-            //                    .padding(.bottom,20)
-            //            }
-            //
-            //            HStack{
-            //                Spacer()
-            //
-            //                tabIcon1(showTextMenu: $showTextMenu, buttonSwitch2: $buttonSwitch2)
-            //                    .onTapGesture {
-            //                        withAnimation{
-            //                            showTextMenu.toggle()
-            //                            buttonSwitch2.toggle()
-            //                        }
-            //                    }
-            //
-            //                Spacer()
-            //                tabMenuIcon(showMenu: $showMenu, buttonSwitch2: $buttonSwitch2)
-            //                    .onTapGesture {
-            //                        withAnimation{
-            //                            buttonSwitch2.toggle()
-            //                            showMenu.toggle()
-            //
-            //                        }
-            //                    }
-            //
-            //                Spacer()
-            //                tabIcon2(buttonSwitch2: $buttonSwitch2)
-            //                    .onTapGesture {
-            //                        withAnimation{
-            //                            isDarkMode.toggle()
-            //                            buttonSwitch2.toggle()
-            //
-            //                        }
-            //                    }
-            //                Spacer()
             
-            //            }
-            //            .frame(height: UIScreen.main.bounds.height / 10)
-            //            .frame(width: UIScreen.main.bounds.width / 1)
-            //            .background(Color(.systemGray5))
             
             Spacer()
         }
@@ -118,106 +64,5 @@ struct GameView_Previews: PreviewProvider {
         GameView()
         // Make the database available to all other view through the environment
             .environment(\.blackbirdDatabase, AppDatabase.instance)
-    }
-}
-
-struct tabMenuIcon:View{
-    @Binding var showMenu: Bool
-    @Binding var buttonSwitch2: Bool
-    var body: some View{
-        Image(systemName: "light.max")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 30,height: 20)
-            .foregroundColor(buttonSwitch2 ? .white : .black)
-        
-    }
-}
-
-struct tabIcon1:View{
-    @Binding var showTextMenu: Bool
-    @Binding var buttonSwitch2: Bool
-    var body: some View{
-        Image(systemName: "textformat")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 30,height: 20)
-            .foregroundColor(buttonSwitch2 ? .white : .black)
-        
-        
-        
-        
-    }
-}
-
-struct tabIcon2:View{
-    @Binding var buttonSwitch2: Bool
-    
-    var body: some View{
-        Image(systemName: buttonSwitch2 ? "moon.zzz" : "sun.max")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 30,height: 20)
-            .foregroundColor(buttonSwitch2 ? .white : .black)
-        
-    }
-}
-
-struct PopUpMenu: View{
-    @State private var brightness: Double = 1.0
-    var body: some View{
-        HStack{
-            Text("Brightness:")
-            Slider(value: $brightness, in: 0.0...1.0){
-            }
-            .onChange(of: brightness){ _ in
-                UIScreen.main.brightness = CGFloat(brightness)
-                
-            }
-        }
-        .transition(.scale)
-        .padding(.horizontal,40)
-        
-    }
-}
-
-
-struct TextMenu: View{
-    @Binding var textSize: Int
-    var body: some View{
-        HStack{
-            Button(action: {
-                textSize += 1
-            }, label: {
-                
-                Image(systemName: "plus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 30,height: 20)
-                    .foregroundColor(.blue)
-                
-            })
-            
-            Spacer()
-            
-            Text("\(textSize)")
-                .font(.system(size: 20))
-            
-            Spacer()
-            
-            Button(action: {
-                textSize -= 1
-            }, label: {
-                Image(systemName: "minus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 3.5,height: 3.5)
-                    .foregroundColor(.blue)
-            })
-        }
-        .transition(.scale)
-        .padding(.horizontal,40)
-        .padding(.trailing,27)
-        
     }
 }

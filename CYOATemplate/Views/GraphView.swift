@@ -49,6 +49,7 @@ struct GraphViewRepresentationNode{
 struct CircleData{
     let x: Int
     let y: Int
+    let isCircle: Bool
 }
 
 struct GraphView: View {
@@ -114,9 +115,6 @@ struct GraphView: View {
         }
     }
     
-    func make_draw_edge() -> [Int]{
-        return []
-    }
     
     func make_draw_node() -> [CircleData]{
         let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count + 2)) // get the delta y distance
@@ -131,7 +129,7 @@ struct GraphView: View {
             for x in 1...eachRow.count{
                 let xPos = x * delta_x
                 let yPos = i * delta_y
-                circles.append(CircleData(x: xPos, y: yPos))
+                circles.append(CircleData(x: xPos, y: yPos, isCircle: true))
             }
         }
         

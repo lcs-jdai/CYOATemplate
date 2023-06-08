@@ -16,5 +16,5 @@ struct Node: BlackbirdModel {
     @BlackbirdColumn var image: String?
     @BlackbirdColumn var ending_type_id: Int?
     @BlackbirdColumn var ending_narrative: String?
-    
+    @BlackbirdColumn var visit_count: Int
 }

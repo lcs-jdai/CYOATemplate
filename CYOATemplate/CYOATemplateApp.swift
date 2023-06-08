@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct CYOATemplateApp: App {
+
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -23,12 +24,21 @@ struct CYOATemplateApp: App {
                             .tabItem {
                                 Label("Graph", systemImage: "map")
                             }
+//
+//                Text("Settings")
+//                    .environment(\.blackbirdDatabase, AppDatabase.instance)
+//                            .tabItem {
+//                                Label("Settings", systemImage: "gear")
+//                            }
                 
-                Text("Settings")
+                Text("Dark Mode")
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
-                            .tabItem {
-                                Label("Settings", systemImage: "gear")
+                    .tabItem {
+                                Label("DarkMode", systemImage: "moon.zzz")
                             }
+                    .foregroundColor(Color.black)
+                       
+                    
 
             }
 

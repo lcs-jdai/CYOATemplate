@@ -119,10 +119,10 @@ struct GraphView: View {
                         color: .black,
                         coordinate: CGPoint(x: CGFloat(circleLocations[num].x), y: CGFloat(circleLocations[num].y))
                         )
+
                 }
                 
             }
-            
         }
     }
     
@@ -266,5 +266,4 @@ struct GraphView: View {
         
         startNode = start_node
     }
-    
 }

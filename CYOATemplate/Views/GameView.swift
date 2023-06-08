@@ -28,7 +28,6 @@ struct GameView: View {
     
     // MARK: Computed properties
     var body: some View {
-        //        ZStack(alignment: .bottom){
         VStack(spacing: 10) {
             Spacer()
             HStack {
@@ -40,10 +39,11 @@ struct GameView: View {
                 
                 Spacer()
             }
-            
+                        
             NodeView(currentNodeId: currentNodeId)
                 .font(.system(size: CGFloat(textSize)))
                 .padding(20)
+
             
             Divider()
             
@@ -53,16 +53,17 @@ struct GameView: View {
             Spacer()
 
             Button(action: {playSound()}, label: {Text("Play Background Music")})
+                .padding(.bottom,20)
 
             // Menu Bar
             if showMenu {
                 PopUpMenu()
-                    .padding(.vertical,20)
+                    .padding(.bottom,20)
             }
             
             if showTextMenu{
                 TextMenu(textSize: $textSize)
-                    .padding(.vertical,20)
+                    .padding(.bottom,20)
             }
             
             HStack{

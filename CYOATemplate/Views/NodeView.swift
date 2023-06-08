@@ -28,6 +28,7 @@ struct NodeView: View {
         if let node = nodes.results.first {
             VStack{
                 Text("This node has been visited \(node.visit_count) times")
+
                 Divider()
                 // Show a Text view, but render Markdown syntax, preserving newline characters
                 Text(try! AttributedString(markdown: node.narrative,

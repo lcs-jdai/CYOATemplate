@@ -45,6 +45,12 @@ struct GraphViewRepresentationNode{
     let currentNode: Int
     let previousNode: Int // for backtracking and drawing line
 }
+
+struct CircleData{
+    let x: Int
+    let y: Int
+}
+
 struct GraphView: View {
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     @BlackbirdLiveModels var edges: Blackbird.LiveResults<Edge>
@@ -80,43 +86,39 @@ struct GraphView: View {
         return makeGraphRepresentation()
     }
     
+    private var circleLocations: [CircleData]{
+        return make_draw_node()
+    }
     
     var body: some View {
         VStack{
-            Text("\(edges.results.count)")
-            Text("\(nodes.results.count)")
-            Text("\(graph.count)")
-            Text("\(graphRepresentation.count)")
-            Button(action: {make_draw_node()}, label: {Text("Press me to make graph")})
+//            Text("\(edges.results.count)")
+//            Text("\(nodes.results.count)")
+//            Text("\(graph.count)")
+//            Text("\(graphRepresentation.count)")
+//            Button(action: {make_draw_node()}, label: {Text("Press me to make graph")})
 
             ZStack(alignment: .topLeading) {
-                
                 Rectangle()
                     .fill(.white)
+                ForEach(0..<circleLocations.count, id: \.self){ num in
+                    VertexView(
+                        radius: 10,
+                        color: .black,
+                        coordinate: CGPoint(x: CGFloat(circleLocations[num].x), y: CGFloat(circleLocations[num].y))
+                        )
+                }
                 
-                VertexView(
-                    radius: 16,
-                    color: .black,
-                    coordinate: CGPoint(x: screenWidth, y: screenHeight))
-                
-                EdgeShape(
-                    start: CGPoint(x: screenWidth, y: screenHeight),
-                    end: CGPoint(x: 0, y: 0))
-                .stroke()
-                
-                VertexView(
-                    radius: 16,
-                    color: .red,
-                    coordinate: CGPoint(x: 0, y: 0))
             }
+            
         }
     }
     
-    func make_draw_node(){
+    func make_draw_node() -> [CircleData]{
         let delta_y = Int(Double(screenHeight)  / Double(graphRepresentation.count)) // get the delta y distance
         let radius = delta_y / 2 - 1
 
-        var circles: [(Int, Int)] = []
+        var circles: [CircleData] = []
         for i in 1...graphRepresentation.count{
             let eachRow = graphRepresentation[i - 1]
             let delta_x = Int(Double(screenWidth) / Double(eachRow.count))
@@ -125,11 +127,11 @@ struct GraphView: View {
             for x in 1...eachRow.count{
                 let xPos = x * delta_x
                 let yPos = i * delta_y
-                circles.append((xPos, yPos))
+                circles.append(CircleData(x: xPos, y: yPos))
             }
         }
         
-        print(circles)
+        return circles
     }
     
     func make_graph(node_count: Int, nodes: Blackbird.LiveResults<Node>, edges: Blackbird.LiveResults<Edge>) -> [[Int]]{

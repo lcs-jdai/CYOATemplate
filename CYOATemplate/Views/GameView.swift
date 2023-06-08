@@ -15,7 +15,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
-    @State var textSize:Int = 20
+    @State var textSize:Int = 15
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true

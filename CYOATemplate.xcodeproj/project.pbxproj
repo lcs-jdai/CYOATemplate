@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		417A0BF82A2ED04C00216B79 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A0BF72A2ED04C00216B79 /* Color.swift */; };
 		81C198A92A251ABB0047A4B3 /* CYOATemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */; };
 		81C198AD2A251ABC0047A4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C198AC2A251ABC0047A4B3 /* Assets.xcassets */; };
 		81C198B02A251ABC0047A4B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C198AF2A251ABC0047A4B3 /* Preview Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		417A0BF72A2ED04C00216B79 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		81C198A52A251ABB0047A4B3 /* CYOATemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CYOATemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYOATemplateApp.swift; sourceTree = "<group>"; };
 		81C198AC2A251ABC0047A4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				81C198BA2A251B1B0047A4B3 /* Node.swift */,
 				81C198BC2A251B2B0047A4B3 /* Edge.swift */,
 				81C198BE2A251B4D0047A4B3 /* Ending.swift */,
+				417A0BF72A2ED04C00216B79 /* Color.swift */,
 				E59F059D2A2ED3FF0016ECB5 /* Audio.swift */,
 			);
 			path = Model;
@@ -211,6 +214,7 @@
 				81C784AF2A28B4E7001BC867 /* EdgesView.swift in Sources */,
 				81C784AB2A28AD0B001BC867 /* NodeView.swift in Sources */,
 				81C198BF2A251B4D0047A4B3 /* Ending.swift in Sources */,
+				417A0BF82A2ED04C00216B79 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

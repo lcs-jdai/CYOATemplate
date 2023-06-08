@@ -10,6 +10,7 @@ import AVFoundation
 
 @main
 struct CYOATemplateApp: App {
+    private var player: AVAudioPlayer
     
     var body: some Scene {
         WindowGroup {
@@ -26,7 +27,7 @@ struct CYOATemplateApp: App {
                         Label("Graph", systemImage: "map")
                     }
                 
-                SettingsView()
+                SettingsView(player: self.player)
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
                     .tabItem {
                         Label("Settings", systemImage: "gear")
@@ -35,28 +36,24 @@ struct CYOATemplateApp: App {
                 
             }
             .onAppear{
-//                playSound()
+                playSound()
             }
         }
     }
     
+    init(){
+        
+        let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")!
+        do{
+            player = try AVAudioPlayer(contentsOf: url)
+        }catch{
+            exit(-1)
+        }
+    }
     
     // play sound
     func playSound(){
-        
-        let url = Bundle.main.url(forResource: "background_music", withExtension: "wav")
-        
-        guard let url = url else {
-            print("Cannot find file background music!")
-            return
-        }
-        do{
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.numberOfLoops = -1
-            player?.play()
-        }catch{
-            
-        }
-        
+        player.numberOfLoops = -1
+        player.play()
     }
 }

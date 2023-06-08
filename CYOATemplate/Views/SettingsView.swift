@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct SettingsView: View {
     @State var textSize:Int = 15
@@ -13,6 +14,14 @@ struct SettingsView: View {
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
     @AppStorage("isDarkMode") private var isDarkMode:Bool = true
+    
+    private var isMusicOn: Bool = true
+    
+    // Control the audio level
+    private var player: AVAudioPlayer
+    init(player: AVAudioPlayer){
+        self.player = player
+    }
     
     var body: some View {
         VStack{
@@ -54,6 +63,10 @@ struct SettingsView: View {
             .frame(width: UIScreen.main.bounds.width / 1)
             .background(Color(.systemGray5))
             
+            Button(action: {stopMusic()}){
+                Text("Music On/Off")
+            }
+            
             // Pop up Menus
             if showMenu{
                 PopUpMenu()
@@ -66,13 +79,18 @@ struct SettingsView: View {
             Spacer()
         }
     }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
+    
+    func stopMusic() {
+        if isMusicOn{
+            player.stop()
+            return
+        }
+        
+        player.numberOfLoops = -1
+        player.play()
     }
 }
+
 
 struct tabMenuIcon:View{
     @Binding var showMenu: Bool

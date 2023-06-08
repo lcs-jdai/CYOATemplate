@@ -131,7 +131,7 @@ struct GraphView: View {
                 ForEach(0..<circleLocations.count, id: \.self){ num in
                     VertexView(
                         radius: 10,
-                        color: .cyan,
+                        color: .red,
                         saturation: normalizedWeights[circleLocations[num].node_id],
                         coordinate: CGPoint(x: CGFloat(circleLocations[num].x), y: CGFloat(circleLocations[num].y))
                         )

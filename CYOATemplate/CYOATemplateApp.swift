@@ -11,11 +11,12 @@ import AVFoundation
 @main
 struct CYOATemplateApp: App {
     private var player: AVAudioPlayer
+    @State private var textSize: Int = 20
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                GameView()
+                GameView(textSize: $textSize)
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
                     .tabItem {
                         Label("Order", systemImage: "gamecontroller")
@@ -27,7 +28,7 @@ struct CYOATemplateApp: App {
                         Label("Graph", systemImage: "map")
                     }
                 
-                SettingsView(player: self.player)
+                SettingsView(player: self.player, textSize: $textSize)
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
                     .tabItem {
                         Label("Settings", systemImage: "gear")

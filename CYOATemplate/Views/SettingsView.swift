@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 
 struct SettingsView: View {
-    @State var textSize:Int = 15
+    @Binding var textSize: Int
     @State private var showTextMenu = false
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
@@ -21,7 +21,8 @@ struct SettingsView: View {
     
     // Control the audio level
     private var player: AVAudioPlayer
-    init(player: AVAudioPlayer){
+    init(player: AVAudioPlayer, textSize:Binding<Int>){
+        _textSize = textSize
         self.player = player
     }
     

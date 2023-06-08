@@ -18,7 +18,11 @@ struct GameView: View {
     @State var nodeHistory: [Int]  = [1]
     // need to store the following
     @AppStorage("isDarkMode") private var isDarkMode:Bool = true
-    @State var textSize:Int = 15
+    @Binding var textSize:Int
+    
+    init(textSize: Binding<Int>){
+        _textSize = textSize
+    }
     
     // MARK: Computed properties
     var body: some View {
@@ -61,7 +65,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(textSize: .constant(20))
         // Make the database available to all other view through the environment
             .environment(\.blackbirdDatabase, AppDatabase.instance)
     }

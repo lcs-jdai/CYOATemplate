@@ -102,9 +102,6 @@ struct GraphView: View {
             Button(action: {update_edge_location()}, label: {Text("Draw Edges")})
 
             ZStack(alignment: .topLeading) {
-                Rectangle()
-                    .fill(.white)
-                
                 // rendering all the edges
                 ForEach(0..<edgeLocation.count, id: \.self){ num in
                     EdgeShape(start: CGPoint(x: edgeLocation[num].0, y: edgeLocation[num].1),

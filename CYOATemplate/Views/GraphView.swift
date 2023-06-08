@@ -24,9 +24,9 @@ struct EdgeShape: Shape {
 }
 
 struct VertexView: View {
-    var radius: Double
-    var color: Color
-    var coordinate: CGPoint
+    let radius: Double
+    let color: Color
+    let coordinate: CGPoint
     
     var body: some View {
         Circle()
@@ -113,7 +113,7 @@ struct GraphView: View {
                 ForEach(0..<circleLocations.count, id: \.self){ num in
                     VertexView(
                         radius: 10,
-                        color: .black,
+                        color: CGColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0),
                         coordinate: CGPoint(x: CGFloat(circleLocations[num].x), y: CGFloat(circleLocations[num].y))
                         )
 

@@ -13,22 +13,10 @@ struct SettingsView: View {
     @State private var showMenu = false
     @State private var buttonSwitch2 = true
     @AppStorage("isDarkMode") private var isDarkMode:Bool = true
-    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack{
-            
-            // Menu Bar
-            if showMenu {
-                PopUpMenu()
-                    .padding(.bottom,20)
-            }
-            
-            if showTextMenu{
-                TextMenu(textSize: $textSize)
-                    .padding(.bottom,20)
-            }
-            
+            // The Actual Menu
             HStack{
                 Spacer()
                 
@@ -65,7 +53,17 @@ struct SettingsView: View {
             .frame(height: UIScreen.main.bounds.height / 10)
             .frame(width: UIScreen.main.bounds.width / 1)
             .background(Color(.systemGray5))
-            Text("Settings View")
+            
+            // Pop up Menus
+            if showMenu{
+                PopUpMenu()
+            }
+            
+            if showTextMenu{
+                TextMenu(textSize: $textSize)
+                    .padding(.bottom,20)
+            }
+            Spacer()
         }
     }
 }

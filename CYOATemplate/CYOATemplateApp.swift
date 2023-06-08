@@ -26,7 +26,7 @@ struct CYOATemplateApp: App {
                         Label("Graph", systemImage: "map")
                     }
                 
-                Text("Settings")
+                SettingsView()
                     .environment(\.blackbirdDatabase, AppDatabase.instance)
                     .tabItem {
                         Label("Settings", systemImage: "gear")

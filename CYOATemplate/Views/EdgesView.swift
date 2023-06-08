@@ -24,6 +24,7 @@ struct EdgesView: View {
     // truth for the current node on GameView. This allows the current
     // node to be changed from this view.
     @Binding var currentNodeId: Int
+    @Binding var nodeHistories: [Int]
     
     // MARK: Computed properties
     
@@ -31,7 +32,21 @@ struct EdgesView: View {
     var body: some View {
         
         VStack(spacing: 20) {
-
+            // Display the previous page based on the node history
+            if nodeHistories.count > 1{
+                // displaying the button
+                HStack{
+                    Spacer()
+                    
+                    Text(try! AttributedString(markdown: "Back"))
+                        .multilineTextAlignment(.trailing)
+                        .onTapGesture {
+                            currentNodeId = nodeHistories[nodeHistories.count - 2]
+                            nodeHistories.removeLast()
+                        }
+                }
+            }
+            
             if edges.results.count > 0 {
 
                 ForEach(edges.results) { currentEdge in
@@ -44,7 +59,9 @@ struct EdgesView: View {
                         Text(try! AttributedString(markdown: currentEdge.prompt))
                             .multilineTextAlignment(.trailing)
                             .onTapGesture {
+                                nodeHistories.append(currentEdge.to_node_id)
                                 currentNodeId = currentEdge.to_node_id
+                                
                             }
 
                     }
@@ -57,7 +74,10 @@ struct EdgesView: View {
 
                     Text("No edges found for node with \(currentNodeId).")
                         .onTapGesture {
+                            nodeHistories.removeAll()
+                            nodeHistories.append(1)
                             currentNodeId = 1
+                            
                         }
                 }
             }
@@ -67,7 +87,7 @@ struct EdgesView: View {
     }
     
     // MARK: Initializer
-    init(currentNodeId: Binding<Int>) {
+    init(currentNodeId: Binding<Int>, nodeHistories: Binding<[Int]>) {
         
         // Retrieve edges for the current node in the graph
         _edges = BlackbirdLiveModels({ db in
@@ -77,6 +97,7 @@ struct EdgesView: View {
         
         // Set the current node
         _currentNodeId = currentNodeId
+        _nodeHistories = nodeHistories
         
     }
 }
@@ -84,9 +105,9 @@ struct EdgesView: View {
 struct EdgesView_Previews: PreviewProvider {
     static var previews: some View {
 
-        EdgesView(currentNodeId: .constant(3))
+        EdgesView(currentNodeId: .constant(3), nodeHistories: .constant([3]))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
-        
+
     }
 }

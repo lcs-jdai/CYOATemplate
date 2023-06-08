@@ -76,13 +76,18 @@ struct GraphView: View {
         return weights
     }
     
+    private var graphRepresentation : [[GraphViewRepresentationNode]] {
+        return makeGraphRepresentation()
+    }
+    
     
     var body: some View {
         VStack{
             Text("\(edges.results.count)")
             Text("\(nodes.results.count)")
             Text("\(graph.count)")
-            Button(action: {print(makeGraphRepresentation().count)}, label: {Text("Press me to make graph")})
+            Text("\(graphRepresentation.count)")
+            Button(action: {}, label: {Text("Press me to make graph")})
 
             ZStack(alignment: .topLeading) {
                 
@@ -130,6 +135,11 @@ struct GraphView: View {
     func connected_node(node_id: Int, graph: [[Int]]) -> [Int]{
         var _connectedTo: [Int] = []
         var atNode = 0
+
+        if(node_id >= graph.count){
+            return []
+        }
+        
         for someNode in graph[node_id]{
             if someNode != 0 {
                 _connectedTo.append(atNode)
@@ -176,6 +186,7 @@ struct GraphView: View {
             atLayer += 1
         }
         
+        graphViewRepresentation.removeLast()
         return graphViewRepresentation
     }
    

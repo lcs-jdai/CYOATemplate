@@ -30,6 +30,7 @@ struct GameView: View {
             Spacer()
             HStack {
                 Text("\(currentNodeId)")
+                    .font(.custom("Freshman", size: CGFloat(textSize)))
                     .font(.largeTitle)
                     .padding(.top,40)
                     .padding(.horizontal,20)
@@ -39,14 +40,17 @@ struct GameView: View {
             }
             
             NodeView(currentNodeId: currentNodeId)
-                .font(.system(size: CGFloat(textSize)))
+                .font(.custom("Freshman", size: CGFloat(textSize)))
+//                .font(.system(size: CGFloat(textSize)))
                 .padding(20)
+            
             
             
             Divider()
             
             EdgesView(currentNodeId: $currentNodeId, nodeHistories: $nodeHistory)
-                .font(.system(size: CGFloat(textSize)))
+                .font(.custom("Freshman", size: CGFloat(textSize)))
+//                .font(.system(size: CGFloat(textSize)))
                 .padding(20)
             Spacer()
             
@@ -63,9 +67,11 @@ struct GameView: View {
     
 }
 
+
+
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(textSize: .constant(20))
+        GameView(textSize: .constant(15))
         // Make the database available to all other view through the environment
             .environment(\.blackbirdDatabase, AppDatabase.instance)
     }

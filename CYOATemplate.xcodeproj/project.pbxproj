@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		41601B312A3205FB00D0B483 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41601B302A3205FB00D0B483 /* Color.swift */; };
-		41B664C22A33DC2400B3C7F7 /* RetroGaming.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41B664C12A33DC2400B3C7F7 /* RetroGaming.ttf */; };
 		41B664CA2A33EC8800B3C7F7 /* Freshman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41B664C92A33EC8800B3C7F7 /* Freshman.ttf */; };
 		81C198A92A251ABB0047A4B3 /* CYOATemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */; };
 		81C198AD2A251ABC0047A4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C198AC2A251ABC0047A4B3 /* Assets.xcassets */; };
@@ -31,7 +30,6 @@
 /* Begin PBXFileReference section */
 		41601B302A3205FB00D0B483 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		41B664C02A33D6C200B3C7F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		41B664C12A33DC2400B3C7F7 /* RetroGaming.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RetroGaming.ttf; sourceTree = "<group>"; };
 		41B664C92A33EC8800B3C7F7 /* Freshman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Freshman.ttf; path = ../../Freshman.ttf; sourceTree = "<group>"; };
 		81C198A52A251ABB0047A4B3 /* CYOATemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CYOATemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYOATemplateApp.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			children = (
 				41B664C02A33D6C200B3C7F7 /* Info.plist */,
 				E59F059B2A2ED2150016ECB5 /* background_music.wav */,
-				41B664C12A33DC2400B3C7F7 /* RetroGaming.ttf */,
 				41B664C92A33EC8800B3C7F7 /* Freshman.ttf */,
 				81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */,
 				81C784A72A28AB26001BC867 /* Helpers */,
@@ -205,7 +202,6 @@
 				E59F059C2A2ED2150016ECB5 /* background_music.wav in Resources */,
 				81C198B02A251ABC0047A4B3 /* Preview Assets.xcassets in Resources */,
 				81C784AD2A28B1D6001BC867 /* db.sqlite in Resources */,
-				41B664C22A33DC2400B3C7F7 /* RetroGaming.ttf in Resources */,
 				81C198AD2A251ABC0047A4B3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		41601B302A3205FB00D0B483 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		41B664C02A33D6C200B3C7F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		41B664C02A33D6C200B3C7F7 /* Freshman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Freshman.ttf; path = CYOATemplate/Freshman.ttf; sourceTree = SOURCE_ROOT; };
 		81C198A52A251ABB0047A4B3 /* CYOATemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CYOATemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYOATemplateApp.swift; sourceTree = "<group>"; };
 		81C198AC2A251ABC0047A4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		81C784AA2A28AD0B001BC867 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
 		81C784AC2A28B1D6001BC867 /* db.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite; sourceTree = "<group>"; };
 		81C784AE2A28B4E7001BC867 /* EdgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesView.swift; sourceTree = "<group>"; };
-		E52D785A2A3419ED00810F5D /* Freshman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Freshman.ttf; path = ../../../../../Downloads/Freshman.ttf; sourceTree = "<group>"; };
+		E52D785A2A3419ED00810F5D /* Freshman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Freshman.ttf; path = CYOATemplate/Freshman.ttf; sourceTree = SOURCE_ROOT; };
 		E582CE0E2A325C3F00DDB2D4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E59F059B2A2ED2150016ECB5 /* background_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_music.wav; sourceTree = "<group>"; };
 		E59F059D2A2ED3FF0016ECB5 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		81C198A72A251ABB0047A4B3 /* CYOATemplate */ = {
 			isa = PBXGroup;
 			children = (
-				41B664C02A33D6C200B3C7F7 /* Info.plist */,
+				41B664C02A33D6C200B3C7F7 /* Freshman.ttf */,
 				E59F059B2A2ED2150016ECB5 /* background_music.wav */,
 				E52D785A2A3419ED00810F5D /* Freshman.ttf */,
 				81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */,

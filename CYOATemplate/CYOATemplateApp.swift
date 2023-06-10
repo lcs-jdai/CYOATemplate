@@ -11,7 +11,7 @@ import AVFoundation
 @main
 struct CYOATemplateApp: App {
     private var player: AVAudioPlayer
-    @State private var textSize: Int = 20
+    @State private var textSize: Int = 15
     
     var body: some Scene {
         WindowGroup {

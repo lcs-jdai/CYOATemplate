@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		41601B312A3205FB00D0B483 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41601B302A3205FB00D0B483 /* Color.swift */; };
-		41B664CA2A33EC8800B3C7F7 /* Freshman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41B664C92A33EC8800B3C7F7 /* Freshman.ttf */; };
 		81C198A92A251ABB0047A4B3 /* CYOATemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */; };
 		81C198AD2A251ABC0047A4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C198AC2A251ABC0047A4B3 /* Assets.xcassets */; };
 		81C198B02A251ABC0047A4B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C198AF2A251ABC0047A4B3 /* Preview Assets.xcassets */; };
@@ -21,6 +20,7 @@
 		81C784AB2A28AD0B001BC867 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C784AA2A28AD0B001BC867 /* NodeView.swift */; };
 		81C784AD2A28B1D6001BC867 /* db.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 81C784AC2A28B1D6001BC867 /* db.sqlite */; };
 		81C784AF2A28B4E7001BC867 /* EdgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C784AE2A28B4E7001BC867 /* EdgesView.swift */; };
+		E52D785B2A3419ED00810F5D /* Freshman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E52D785A2A3419ED00810F5D /* Freshman.ttf */; };
 		E582CE0F2A325C3F00DDB2D4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582CE0E2A325C3F00DDB2D4 /* SettingsView.swift */; };
 		E59F059C2A2ED2150016ECB5 /* background_music.wav in Resources */ = {isa = PBXBuildFile; fileRef = E59F059B2A2ED2150016ECB5 /* background_music.wav */; };
 		E59F059E2A2ED3FF0016ECB5 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F059D2A2ED3FF0016ECB5 /* Audio.swift */; };
@@ -30,7 +30,6 @@
 /* Begin PBXFileReference section */
 		41601B302A3205FB00D0B483 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		41B664C02A33D6C200B3C7F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		41B664C92A33EC8800B3C7F7 /* Freshman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Freshman.ttf; path = ../../Freshman.ttf; sourceTree = "<group>"; };
 		81C198A52A251ABB0047A4B3 /* CYOATemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CYOATemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYOATemplateApp.swift; sourceTree = "<group>"; };
 		81C198AC2A251ABC0047A4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,6 +42,7 @@
 		81C784AA2A28AD0B001BC867 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
 		81C784AC2A28B1D6001BC867 /* db.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite; sourceTree = "<group>"; };
 		81C784AE2A28B4E7001BC867 /* EdgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesView.swift; sourceTree = "<group>"; };
+		E52D785A2A3419ED00810F5D /* Freshman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Freshman.ttf; path = ../../../../../Downloads/Freshman.ttf; sourceTree = "<group>"; };
 		E582CE0E2A325C3F00DDB2D4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E59F059B2A2ED2150016ECB5 /* background_music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background_music.wav; sourceTree = "<group>"; };
 		E59F059D2A2ED3FF0016ECB5 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			children = (
 				41B664C02A33D6C200B3C7F7 /* Info.plist */,
 				E59F059B2A2ED2150016ECB5 /* background_music.wav */,
-				41B664C92A33EC8800B3C7F7 /* Freshman.ttf */,
+				E52D785A2A3419ED00810F5D /* Freshman.ttf */,
 				81C198A82A251ABB0047A4B3 /* CYOATemplateApp.swift */,
 				81C784A72A28AB26001BC867 /* Helpers */,
 				81C198B62A251ACD0047A4B3 /* Model */,
@@ -198,7 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41B664CA2A33EC8800B3C7F7 /* Freshman.ttf in Resources */,
+				E52D785B2A3419ED00810F5D /* Freshman.ttf in Resources */,
 				E59F059C2A2ED2150016ECB5 /* background_music.wav in Resources */,
 				81C198B02A251ABC0047A4B3 /* Preview Assets.xcassets in Resources */,
 				81C784AD2A28B1D6001BC867 /* db.sqlite in Resources */,
